@@ -1,0 +1,38 @@
+---
+title: "06/17/2024"
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+library(tidycensus)
+library(sf)
+library(ggplot2)
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| label: setup
+tx_tracts <- get_acs(geography = "tract", 
+                     variables = "B19013_001", 
+                     year = 2019, 
+                     survey = "acs5", 
+                     state = "48", 
+                     geometry = TRUE,
+                     progress = FALSE)
+
+# Plotting the median household income by census tract in Texas
+ggplot(tx_tracts) +
+  geom_sf(aes(fill = estimate), color = NA) +
+  scale_fill_viridis_c(option = "viridis") +
+  labs(title = "Median Household Income by Census Tract in Texas",
+       fill = "Income") +
+  theme_minimal()
+```
+

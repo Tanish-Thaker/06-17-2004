@@ -3,3 +3,9 @@ title: "06/17/2004"
 format: html
 ---
 
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+```
+
